@@ -1,3 +1,5 @@
+name: Run tests for OTUS homework
+
 on:
   push:
     branches-ignore: main
