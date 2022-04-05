@@ -1,0 +1,14 @@
+users:
+  - name: yc-user
+    groups: sudo
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+
+runcmd:
+  - wget "https://raw.githubusercontent.com/Otus-DevOps-2022-02/he110_infra/cloud-testapp/install_ruby.sh"
+  - bash install_ruby.sh
+  - wget "https://raw.githubusercontent.com/Otus-DevOps-2022-02/he110_infra/cloud-testapp/install_mongodb.sh"
+  - bash install_mongodb.sh
+  - wget "https://raw.githubusercontent.com/Otus-DevOps-2022-02/he110_infra/cloud-testapp/deploy.sh"
+  - bash deploy.sh
+  - rm install_ruby.sh install_mongodb.sh deploy.sh
