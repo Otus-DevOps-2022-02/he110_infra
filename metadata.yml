@@ -1,0 +1,17 @@
+#cloud-config
+users:
+  - name: yc-user
+    groups: sudo
+    shell: /bin/bash
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCazfcYa8DucVF35wpVa5o6m25NWTK9653zZXeWhnEfj25PxYzDakTXxkLQcoCyPxARQrBO6f/g7W557gs+f4/Xgmos0UVxSw9stqOpSz8IYfZbnyfEDfU7eqjvxyDsO+QYkSgXSzilyR1G6b4rw6neNSw5xdKQqhZLwtD04qGPe5kppsvvBC3MzrFZyD0nYuvrmw4RtpFWzjdyESRpQI6rUBNsFXGkBN9ocbrMvyhphup32XLiNoD0JF5ogBa1PAJMelQI/ifSBPlK/q76k8q+EG+5k1GTcnKhlhP3rLa2wP7ADzZA1VDDdSX6VHpWenBx8q7J3iNY5zmDq0sO03gY2sjmtKwTvtMEw5Kw1yQylbNnbUS/fC2RG+3qcV5MdjqF3WM7z6Oilx3FmeW5vs9GYlgyuLP6r0JGbCl+8xc5/zUxyxTTZ+REfI4TSCKEauFBXNaHKLyDpWLiINguJBbHPte48qj60c+D+vEgDsRKYHZZy7M8vU0NGfP2lIp/jdM= i.zobenko@i-zobenko
+
+runcmd:
+  - wget "https://raw.githubusercontent.com/Otus-DevOps-2022-02/he110_infra/cloud-testapp/install_ruby.sh"
+  - bash install_ruby.sh
+  - wget "https://raw.githubusercontent.com/Otus-DevOps-2022-02/he110_infra/cloud-testapp/install_mongodb.sh"
+  - bash install_mongodb.sh
+  - wget "https://raw.githubusercontent.com/Otus-DevOps-2022-02/he110_infra/cloud-testapp/deploy.sh"
+  - bash deploy.sh
+  - rm install_ruby.sh install_mongodb.sh deploy.sh
