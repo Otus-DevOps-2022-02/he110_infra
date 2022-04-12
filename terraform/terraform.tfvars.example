@@ -5,3 +5,4 @@ private_key_path         = "~/.ssh/id_rsa"
 image_id                 = "fd8n83aiu4romt0nll34"
 subnet_id                = "e9b9m44utmc9av74ogtm"
 service_account_key_file = "../packer/key.json"
+instance_count           = 1

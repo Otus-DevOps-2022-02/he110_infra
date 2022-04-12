@@ -65,4 +65,12 @@ yc compute instance create \
 3. Выполнить команду `cd packer && packer build ./ubuntu16.json`
 
 > **Важно!** У вас должен быть сгенерированн ключ доступа служебной учетной записи Yandex Cloud. Путь до файла указывается в **packer/variables.json**
->
+
+
+## Создание инфраструктуры
+
+Подготовка инфраструктуры выполняется с помощью Terraform. Что бы запустить процесс создания, выполните:
+
+1. Скопируйте файл **terraform/terraform.tfvars.example** в **terraform/terraform.tfvars**
+2. Введите актуальные данные в файле **terraform/terraform.tfvars**
+3. Откройте в терминате директорию **terraform** и выполнте команду `terraform apply --auto-approve`
