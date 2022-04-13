@@ -53,3 +53,16 @@ yc compute instance create \
   --zone ru-central1-a \
   --metadata-from-file user-data=./metadata.yml
 ```
+
+## Подготовка загрузочного диска
+
+Образ загрузочного диска готовится с помощью `Packer` на основании файла **packer/ubuntu16.json**
+
+Для создания образа необходимо:
+
+1. Переименовать файл **packer/variables.json.example** в **packer/variables.json**
+2. Обновить значения переменных в файле **packer/variables.json**
+3. Выполнить команду `cd packer && packer build ./ubuntu16.json`
+
+> **Важно!** У вас должен быть сгенерированн ключ доступа служебной учетной записи Yandex Cloud. Путь до файла указывается в **packer/variables.json**
+>
