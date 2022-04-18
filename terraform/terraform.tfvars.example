@@ -1,0 +1,7 @@
+zone                     = "ru-central1"
+cloud_id                 = "b1g0i290lulul1ql24qt"
+folder_id                = "b1gvk5leqeg49qkcpcno"
+service_account_key_file = "../packer/key.json"
+bucket_name              = "name"
+access_key               = "access_key"
+secret_key               = "secret_key"
