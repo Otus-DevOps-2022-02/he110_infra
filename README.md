@@ -71,6 +71,7 @@ yc compute instance create \
 
 Подготовка инфраструктуры выполняется с помощью Terraform. Что бы запустить процесс создания, выполните:
 
-1. Скопируйте файл **terraform/terraform.tfvars.example** в **terraform/terraform.tfvars**
-2. Введите актуальные данные в файле **terraform/terraform.tfvars**
-3. Откройте в терминате директорию **terraform** и выполнте команду `terraform apply --auto-approve`
+1. В зависимости от требуемого вам окружения, перейдите в директорию **terraform/prod** или **terraform/stage**
+2. Скопируйте файл **terraform.tfvars.example** в **terraform.tfvars**
+3. Введите актуальные данные в файле **terraform.tfvars**
+4. Откройте в текущей директории терминал и выполнте команду `terraform apply --auto-approve`
