@@ -1,0 +1,9 @@
+cloud_id                 = "b1g0i290lulul1ql24qt"
+folder_id                = "b1gvk5leqeg49qkcpcno"
+public_key_path          = "~/.ssh/id_rsa.pub"
+private_key_path         = "~/.ssh/id_rsa"
+app_disk_image           = "fd8t9bg1mrs6rii6trta"
+db_disk_image            = "fd85p8rjphl37ihqv9jh"
+subnet_id                = "e9b9m44utmc9av74ogtm"
+service_account_key_file = "../packer/key.json"
+instance_count           = 1

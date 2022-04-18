@@ -5,8 +5,8 @@
             "service_account_key_file": "{{ user `service_account_key_file` }}",
             "folder_id": "{{ user `folder_id` }}",
             "source_image_family": "{{ user `source_image_family` }}",
-            "image_name": "reddit-base-{{ timestamp }}",
-            "image_family": "reddit-base",
+            "image_name": "reddit-db-{{ timestamp }}",
+            "image_family": "reddit-db",
             "use_ipv4_nat": "true",
             "ssh_username": "ubuntu",
             "platform_id": "standard-v1",
@@ -22,11 +22,6 @@
                 "sleep 30",
                 "sudo ps -ef | grep -i apt"
             ]
-        },
-        {
-            "type": "shell",
-            "script": "scripts/install_ruby.sh",
-            "execute_command": "sudo {{.Path}}"
         },
         {
             "type": "shell",

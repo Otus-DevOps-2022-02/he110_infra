@@ -19,7 +19,10 @@ variable "public_key_path" {
 variable "private_key_path" {
   description = "Path to the private key used for SSH access"
 }
-variable "image_id" {
+variable "app_disk_image" {
+  description = "Disk image for reddit app"
+}
+variable "db_disk_image" {
   description = "Disk image"
 }
 variable "subnet_id" {
