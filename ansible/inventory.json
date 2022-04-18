@@ -7,8 +7,7 @@ from typing import List
 import sys
 from pathlib import Path
 
-ENV = ['prod', 'stage'
-]
+ENV = ['prod', 'stage']
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Terraform inventory script")
@@ -20,73 +19,33 @@ def list_running_hosts():
     instances = []
     for env in ENV:
         path = (str(Path(__file__).parent.absolute()) + '/' + '../terraform/' + env)
-        cmd = (f'terraform -chdir={path
-} show -json')
+        cmd = (f'terraform -chdir={path} show -json')
         encode = subprocess.check_output(cmd.split()).rstrip()
         state = json.loads(encode)
         try:
-            res = state['values'
-]['root_module'
-]['child_modules'
-]
+            res = state['values']['root_module']['child_modules']
             instances.extend(get_instances(res))
         except:
             continue
     group_list = {}
-    group_list['_meta'
-] = {}
-    group_list['_meta'
-]['hostvars'
-] = {}
+    group_list['_meta'] = {}
+    group_list['_meta']['hostvars'] = {}
     for i in instances:
-        group_list['_meta'
-]['hostvars'
-][i['values'
-    ]['hostname'
-    ]
-] = {}
-        if i['values'
-]['network_interface'
-][
-    0
-]['nat_ip_address'
-]:
-            group_list['_meta'
-]['hostvars'
-][i['values'
-    ]['hostname'
-    ]
-]['ansible_host'
-] = i['values'
-]['network_interface'
-][
-    0
-]['nat_ip_address'
-]
-        if i['name'
-] in group_list.keys():
-            group_list[i['name'
-    ]
-].append(i['hostname'
-])
+        group_list['_meta']['hostvars'][i['values']['hostname']] = {}
+        if i['values']['network_interface'][0]['nat_ip_address']:
+            group_list['_meta']['hostvars'][i['values']['hostname']]['ansible_host'] = i['values']['network_interface'][0]['nat_ip_address']
+        if i['name'] in group_list.keys():
+            group_list[i['name']].append(i['hostname'])
         else:
-            group_list[i['name'
-    ]
-] = []
-            group_list[i['name'
-    ]
-].append(i['values'
-]['hostname'
-])
+            group_list[i['name']] = []
+            group_list[i['name']].append(i['values']['hostname'])
     return group_list
 
 def get_instances(state: List) -> List:
     instances = []
     for i in state:
-        for j in i['resources'
-]:
-            if j['type'
-] == 'yandex_compute_instance':
+        for j in i['resources']:
+            if j['type'] == 'yandex_compute_instance':
                 instances.append(j)
     return instances
 
