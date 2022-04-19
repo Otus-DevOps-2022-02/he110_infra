@@ -75,3 +75,10 @@ yc compute instance create \
 2. Скопируйте файл **terraform.tfvars.example** в **terraform.tfvars**
 3. Введите актуальные данные в файле **terraform.tfvars**
 4. Откройте в текущей директории терминал и выполнте команду `terraform apply --auto-approve`
+
+## Клонирование кода с помощью Ansible
+
+> Убедитесь, что вы создали необходимые инстансы приложения с помощью Terraform
+
+1. Перейдите в директорию **ansible**
+2. Выполните команду `ansible-playbook clone.yml`
