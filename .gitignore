@@ -1,3 +1,4 @@
+.idea/
 packer/variables.json
 *.tfstate
 *.tfstate.*.backup
@@ -5,3 +6,4 @@ packer/variables.json
 *.tfvars
 .terraform/
 *.retry
+provider_fix.tf
