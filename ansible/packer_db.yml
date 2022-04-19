@@ -1,0 +1,25 @@
+---
+- name: DB instance provisioning
+  hosts: db
+  become: true
+  tasks:
+    - name: Add APT key
+      apt_key:
+        id: EA312927
+        keyserver: keyserver.ubuntu.com
+
+    - name: Add APT repository
+      apt_repository:
+        repo: deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse
+        state: present
+
+    - name: Install mongoDB
+      apt:
+        name: mongodb-org
+        update_cache: yes
+
+    - name: Enable and start mongoDB
+      service:
+        name: mongod
+        state: started
+        enabled: yes

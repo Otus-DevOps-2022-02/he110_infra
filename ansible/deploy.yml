@@ -7,14 +7,12 @@
       apt:
         name: git
         update_cache: yes
-      tags: deploy-tag
 
     - name: Fetch the latest version of application code
       git:
         repo: "https://github.com/express42/reddit.git"
         dest: /home/ubuntu/reddit
         version: monolith
-      tags: deploy-tag
       notify: Reload puma
 
     - name: Bundle install
