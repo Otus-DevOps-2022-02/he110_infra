@@ -1,6 +1,8 @@
+.idea/
 packer/variables.json
 *.tfstate
 *.tfstate.*.backup
 *.tfstate.backup
 *.tfvars
 .terraform/
+provider_fix.tf
