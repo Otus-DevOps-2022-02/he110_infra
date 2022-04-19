@@ -82,3 +82,10 @@ yc compute instance create \
 
 1. Перейдите в директорию **ansible**
 2. Выполните команду `ansible-playbook clone.yml`
+
+## Деплой приложения
+
+> Убедитесь, что вы создали необходимые инстансы приложения с помощью Terraform
+
+1. Перейдите в директорию **ansible**
+2. Выполните команду `ansible-playbook site.yml`
