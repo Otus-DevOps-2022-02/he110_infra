@@ -8,3 +8,4 @@ packer/variables.json
 *.retry
 provider_fix.tf
 ansible/roles/jdauphant.nginx
+vault.key
