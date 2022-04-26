@@ -89,3 +89,12 @@ yc compute instance create \
 
 1. Перейдите в директорию **ansible**
 2. Выполните команду `ansible-playbook site.yml`
+
+## Структура кода Ansible
+
+Код плейбуков разделен на следующие важные компоненты:
+
+1. Файлы окружений. Расположены по пути ansible/environments/
+2. Файлы ролей. Размещены в ansible/roles
+
+Окружения содержат файлы с учетными данными (credentials.yml), зашифрованные с помощью ansible-vault.
