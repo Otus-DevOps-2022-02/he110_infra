@@ -34,10 +34,9 @@ jobs:
           path: terraform/
 
       - name: Run ansible-lint
-        uses: ansible-community/ansible-lint-action@main
+        uses: barolab/action-ansible-lint@master
         with:
-          path: "ansible/playbooks/"
-
+          targets: ansible/**/*.yml
   test:
     runs-on: ubuntu-latest
 
