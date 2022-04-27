@@ -13,7 +13,7 @@
         mode: 0644
       tags: db-tag
       notify: Restart mongod
-    
+
     - name: Add unit file for Puma
       become: true
       copy:
@@ -27,7 +27,7 @@
         src: templates/db_config.j2
         dest: /home/ubuntu/db_config
       tags: app-tag
-    
+
     - name: Ensure git is installed
       become: true
       apt:

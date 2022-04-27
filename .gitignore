@@ -7,3 +7,5 @@ packer/variables.json
 .terraform/
 *.retry
 provider_fix.tf
+ansible/roles/jdauphant.nginx
+vault.key

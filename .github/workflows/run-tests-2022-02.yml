@@ -2,11 +2,41 @@ name: Run tests for OTUS homework
 
 on:
   push:
-    branches-ignore: main
+    branches-ignore:
+      - main
   pull_request:
-    branches-ignore: main
+    branches-ignore:
+      - main
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: Validate Packer code
+        uses: hashicorp/packer-github-actions@master
+        continue-on-error: true
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: packer/app.json packer/db.json packer/ubuntu16.json
+
+      - name: Copy terraform provider fix file
+        run: cp .github/files/terraform_provider_fix.tf terraform/
+
+      - name: terraform validate
+        uses: dflook/terraform-validate@v1
+        continue-on-error: true
+        with:
+          path: terraform/
+
+      - name: Run ansible-lint
+        uses: barolab/action-ansible-lint@master
+        with:
+          targets: ansible/**/*.yml
   test:
     runs-on: ubuntu-latest
 

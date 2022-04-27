@@ -1,7 +1,8 @@
 #!/usr/local/opt/php@7.4/bin/php
 <?php
 
-const EXPORT_FILE = 'inventory.json';
+const EXPORT_FILE_STAGE = 'environments/stage/inventory.json';
+const EXPORT_FILE_PROD  = 'environments/prod/inventory.json';
 
 const TAGS_TO_GROUPS = [
     'reddit-db'  => 'db',
@@ -30,9 +31,9 @@ $header = static function (string $message) use ($isVerbose): void {
     printf("== %s ==\n", $message);
 };
 
-$exportResult = static function (array $instances) use ($header): void {
-    $header("Exporting result");
-    file_put_contents(EXPORT_FILE, json_encode($instances, JSON_THROW_ON_ERROR));
+$exportResult = static function (array $instances, string $path) use ($header): void {
+    $header(sprintf('Exporting result to "%s"', $path));
+    file_put_contents($path, json_encode($instances, JSON_THROW_ON_ERROR));
 };
 
 $error = static function (string $message, bool $interrupt = true) use ($exportResult, $isVerbose): void {
@@ -40,7 +41,8 @@ $error = static function (string $message, bool $interrupt = true) use ($exportR
         printf("Error: %s\n", $message);
     }
     if ($interrupt) {
-        $exportResult([]);
+        $exportResult([], EXPORT_FILE_PROD);
+        $exportResult([], EXPORT_FILE_STAGE);
         exit(1);
     }
 };
@@ -62,7 +64,10 @@ try {
     $error('Cannot decode data from YC');
 }
 
-$instances = [];
+$instances = [
+    'prod' => [],
+    'stage' => [],
+];
 $header("Building instance tree");
 foreach ($decoded as $idx => $instance) {
     $name = $instance['name'] ?? sprintf('%s-%d', 'instance', $idx);
@@ -73,16 +78,19 @@ foreach ($decoded as $idx => $instance) {
         continue;
     }
 
+    $isStage = stripos($name, 'stage') !== false;
+
     $tag   = $instance['labels']['tags'] ?? null;
     $group = TAGS_TO_GROUPS[$tag] ?? GROUP_OF_UNKNOWN;
 
-    $instances[$group]['hosts'][$name] = ['ansible_host' => $ip];
+    $instances[$isStage ? 'stage' : 'prod'][$group]['hosts'][$name] = ['ansible_host' => $ip];
 }
 
-$exportResult($instances);
+$exportResult($instances['stage'], EXPORT_FILE_STAGE);
+$exportResult($instances['prod'], EXPORT_FILE_PROD);
 $header("Successfully done");
 try {
-    echo json_encode($instances, JSON_THROW_ON_ERROR);
+    echo json_encode(array_merge($instances['stage'], $instances['prod']), JSON_THROW_ON_ERROR);
 } catch (JsonException $e) {
     $error('Cannot encode result json');
 }
