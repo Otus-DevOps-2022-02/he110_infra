@@ -21,7 +21,8 @@ Vagrant.configure("2") do |config|
     app.vm.network :private_network, ip: "10.10.10.20"
 
     app.vm.provision "ansible" do |ansible|
-        ansible.playbook = "site.yml" ansible.groups = {
+        ansible.playbook = "playbooks/site.yml"
+        ansible.groups = {
             "app" => ["appserver"],
             "app:vars" => { "db_host" => "10.10.10.10"}
         }
