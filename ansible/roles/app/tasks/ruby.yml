@@ -1,10 +1,10 @@
 ---
 - name: Install Ruby
-    apt:
-      name: "{{ item }}"
-      update_cache: yes
-      cache_valid_time: 3600
-    with_items:
-      - ruby-full
-      - ruby-bundler
-      - build-essential
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+    - ruby-full
+    - ruby-bundler
+    - build-essential
